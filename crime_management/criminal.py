@@ -6,8 +6,8 @@ from PIL import Image, ImageTk
 class Criminal:
 
     def __init__(self, root):
-        max_width = 1080
-        max_height = 720
+        max_width = 1540
+        max_height = 790
 
         self.root = root
         self.root.geometry(f'{max_width}x{max_height}+0+0')
@@ -52,21 +52,189 @@ class Criminal:
 
         # Main Frame
         Main_frame = Frame(self.root, bd=2, relief=RIDGE, bg='white')
-        Main_frame.place(x=10, y=200, width=1060, height=500)
+        Main_frame.place(x=10, y=200, width=1500, height=560)
 
         # Upper Frame
         upper_frame = LabelFrame(Main_frame, bd=2, relief=RIDGE, text='Criminal Information', font=(
             'Roboto', 11, 'bold'), bg='white', fg='black')
-        upper_frame.place(x=10, y=10, width=1040, height=230)
+        upper_frame.place(x=10, y=10, width=1470, height=270)
+
+        # Label Entry
+
+        # id kasus
+        case_id = Label(upper_frame, text='Case ID:', font=(
+            'Roboto', 11, 'bold'), bg='white', fg='red')
+        case_id.grid(row=0, column=0, padx=2, sticky=W)
+
+        case_entry = ttk.Entry(upper_frame, width=22,
+                               font=('Roboto', 11, 'bold'))
+        case_entry.grid(row=0, column=1, padx=2, sticky=W)
+
+        # No. Criminal
+        no_criminal = Label(upper_frame, text='No. Criminal:', font=(
+            'Roboto', 11, 'bold'), bg='white', fg='red')
+        no_criminal.grid(row=0, column=2, padx=2, pady=7, sticky=W)
+
+        txt_criminal_no = ttk.Entry(upper_frame, width=22,
+                                    font=('Roboto', 11, 'bold'))
+        txt_criminal_no.grid(row=0, column=3, padx=2, sticky=W, pady=7)
+
+        # Nama Criminal
+        criminal_name = Label(upper_frame, text='Nama Criminal:', font=(
+            'Roboto', 11, 'bold'), bg='white', fg='red')
+        criminal_name.grid(row=1, column=0, padx=2, sticky=W, pady=7)
+
+        txt_criminal_name = ttk.Entry(upper_frame, width=22,
+                                      font=('Roboto', 11, 'bold'))
+        txt_criminal_name.grid(row=1, column=1, padx=2, sticky=W, pady=7)
+
+        # Nickname
+        nickname = Label(upper_frame, text='Nickname:', font=(
+            'Roboto', 11, 'bold'), bg='white', fg='red')
+        nickname.grid(row=1, column=2, padx=2, sticky=W, pady=7)
+
+        txt_nickname = ttk.Entry(upper_frame, width=22,
+                                 font=('Roboto', 11, 'bold'))
+        txt_nickname.grid(row=1, column=3, padx=2, sticky=W, pady=7)
+
+        # tanggal tangkap
+        arrest_date = Label(upper_frame, text='Tanggal tangkap:', font=(
+            'Roboto', 11, 'bold'), bg='white', fg='red')
+        arrest_date.grid(row=2, column=0, padx=2, sticky=W, pady=7)
+
+        txt_arrest_date = ttk.Entry(upper_frame, width=22,
+                                    font=('Roboto', 11, 'bold'))
+        txt_arrest_date.grid(row=2, column=1, padx=2, sticky=W, pady=7)
+
+        # tanggal kriminal
+        date_of_crime = Label(upper_frame, text='Tanggal Kriminal:', font=(
+            'Roboto', 11, 'bold'), bg='white', fg='red')
+        date_of_crime.grid(row=2, column=2, padx=2, sticky=W, pady=7)
+
+        txt_date_of_crime = ttk.Entry(upper_frame, width=22,
+                                      font=('Roboto', 11, 'bold'))
+        txt_date_of_crime.grid(row=2, column=3, padx=2, sticky=W, pady=7)
+
+        # Alamat
+        address = Label(upper_frame, text='Alamat:', font=(
+            'Roboto', 11, 'bold'), bg='white', fg='red')
+        address.grid(row=3, column=0, padx=2, sticky=W, pady=7)
+
+        txt_address = ttk.Entry(upper_frame, width=22,
+                                font=('Roboto', 11, 'bold'))
+        txt_address.grid(row=3, column=1, padx=2, sticky=W, pady=7)
+
+        # Umur
+        age = Label(upper_frame, text='Umur :', font=(
+            'Roboto', 11, 'bold'), bg='white', fg='red')
+        age.grid(row=3, column=2, padx=2, sticky=W, pady=7)
+
+        txt_age = ttk.Entry(upper_frame, width=22,
+                            font=('Roboto', 11, 'bold'))
+        txt_age.grid(row=3, column=3, padx=2, sticky=W, pady=7)
+
+        # Pekerjaan
+        occupution = Label(upper_frame, text='Pekerjaan :', font=(
+            'Roboto', 11, 'bold'), bg='white', fg='red')
+        occupution.grid(row=4, column=0, padx=2, sticky=W, pady=7)
+
+        txt_occupution = ttk.Entry(upper_frame, width=22,
+                                   font=('Roboto', 11, 'bold'))
+        txt_occupution.grid(row=4, column=1, padx=2, sticky=W, pady=7)
+
+        # Tanda lahir
+        birth_mark = Label(upper_frame, text='Tanda Lahir :', font=(
+            'Roboto', 11, 'bold'), bg='white', fg='red')
+        birth_mark.grid(row=4, column=2, padx=2, sticky=W, pady=7)
+
+        txt_birth_mark = ttk.Entry(upper_frame, width=22,
+                                   font=('Roboto', 11, 'bold'))
+        txt_birth_mark.grid(row=4, column=3, padx=2, sticky=W, pady=7)
+
+        # Jenis Kejahatan
+        crime_type = Label(upper_frame, text='Jenis Kejahatan :', font=(
+            'Roboto', 11, 'bold'), bg='white', fg='red')
+        crime_type.grid(row=0, column=4, padx=2, sticky=W, pady=7)
+
+        txt_crime_type = ttk.Entry(upper_frame, width=22,
+                                   font=('Roboto', 11, 'bold'))
+        txt_crime_type.grid(row=0, column=5, padx=2, sticky=W, pady=7)
+
+        # Nama Ayah
+        father_name = Label(upper_frame, text='Nama Ayah :', font=(
+            'Roboto', 11, 'bold'), bg='white', fg='red')
+        father_name.grid(row=1, column=4, padx=2, sticky=W, pady=7)
+
+        txt_father_name = ttk.Entry(upper_frame, width=22,
+                                    font=('Roboto', 11, 'bold'))
+        txt_father_name.grid(row=1, column=5, padx=2, sticky=W, pady=7)
+
+        # Jenis Kelamin
+        gender = Label(upper_frame, text='Jenis Kelamin :', font=(
+            'Roboto', 11, 'bold'), bg='white', fg='red')
+        gender.grid(row=2, column=4, padx=2, sticky=W, pady=7)
+
+        radio_frame_gender = Frame(upper_frame, bd=2, relief=RIDGE, bg='white')
+        radio_frame_gender.place(x=768, y=80, width=182, height=30)
+
+        male = Radiobutton(radio_frame_gender,
+                           text='Laki-laki', value='laki-laki', font=(
+                               'Roboto', 8, 'bold'), bg='white')
+        male.grid(row=0, column=0, padx=2, pady=2, sticky=W)
+        female = Radiobutton(radio_frame_gender,
+                             text='Perempuan', value='perempuan', font=(
+                                 'Roboto', 8, 'bold'), bg='white')
+        female.grid(row=0, column=1, padx=2, pady=2, sticky=W)
+
+        # Wanted?
+        wanted = Label(upper_frame, text='DPO :', font=(
+            'Roboto', 11, 'bold'), bg='white', fg='red')
+        wanted.grid(row=3, column=4, padx=2, sticky=W, pady=7)
+
+        radio_frame_wanted = Frame(upper_frame, bd=2, relief=RIDGE, bg='white')
+        radio_frame_wanted.place(x=768, y=115, width=182, height=30)
+
+        yes = Radiobutton(radio_frame_wanted,
+                          text='iya', value='iya', font=(
+                               'Roboto', 8, 'bold'), bg='white')
+        yes.grid(row=0, column=0, padx=2, pady=2, sticky=W)
+        tidak = Radiobutton(radio_frame_wanted,
+                            text='tidak', value='tidak', font=(
+                                 'Roboto', 8, 'bold'), bg='white')
+        tidak.grid(row=0, column=1, padx=2, pady=2, sticky=W)
+
+        # Button
+        button_frame = Frame(upper_frame, bd=2, relief=RIDGE, bg='white')
+        button_frame.place(x=5, y=200, width=630, height=45)
+
+        # Button Tambah
+        btn_add = Button(button_frame, text='Simpan Biodata', font=(
+            'Roboto', 13, 'bold'), width=14, bg='blue', fg='white')
+        btn_add.grid(row=0, column=0, padx=3, pady=5)
+
+        # Button Perbarui
+        btn_update = Button(button_frame, text='Perbarui', font=(
+            'Roboto', 13, 'bold'), width=14, bg='blue', fg='white')
+        btn_update.grid(row=0, column=1, padx=3, pady=5)
+
+        # Button Hapus
+        btn_delete = Button(button_frame, text='Hapus', font=(
+            'Roboto', 13, 'bold'), width=14, bg='blue', fg='white')
+        btn_delete.grid(row=0, column=2, padx=3, pady=5)
+
+        # Button Clear
+        btn_clear = Button(button_frame, text='Clear', font=(
+            'Roboto', 13, 'bold'), width=14, bg='blue', fg='white')
+        btn_clear.grid(row=0, column=3, padx=3, pady=5)
 
         # Down Frame
         down_frame = LabelFrame(Main_frame, bd=2, relief=RIDGE, text='Criminal Information Table', font=(
             'Roboto', 11, 'bold'), bg='white', fg='black')
-        down_frame.place(x=10, y=250, width=1040, height=230)
+        down_frame.place(x=10, y=280, width=1480, height=270)
 
-        down_frame = LabelFrame(down_frame, bd=2, relief=RIDGE, text='Search Criminal Record', font=(
+        search_frame = LabelFrame(down_frame, bd=2, relief=RIDGE, text='Search Criminal Record', font=(
             'Roboto', 11, 'bold'), bg='white', fg='black')
-        down_frame.place(x=0, y=0, width=1030, height=50)
+        search_frame.place(x=0, y=0, width=1470, height=60)
 
 
 if __name__ == "__main__":
