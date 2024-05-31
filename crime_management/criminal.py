@@ -227,6 +227,15 @@ class Criminal:
             'Roboto', 13, 'bold'), width=14, bg='blue', fg='white')
         btn_clear.grid(row=0, column=3, padx=3, pady=5)
 
+        # Background right side image
+        background_side_img = Image.open('./images/police_logo.jpg')
+        background_side_img = background_side_img.resize(
+            (470, 245), Image.ADAPTIVE)
+        self.photoCrime = ImageTk.PhotoImage(background_side_img)
+
+        self.img_crime = Label(upper_frame, image=self.photoCrime)
+        self.img_crime.place(x=1000, y=0, width=470, height=245)
+
         # Down Frame
         down_frame = LabelFrame(Main_frame, bd=2, relief=RIDGE, text='Criminal Information Table', font=(
             'Roboto', 11, 'bold'), bg='white', fg='black')
@@ -235,6 +244,84 @@ class Criminal:
         search_frame = LabelFrame(down_frame, bd=2, relief=RIDGE, text='Search Criminal Record', font=(
             'Roboto', 11, 'bold'), bg='white', fg='black')
         search_frame.place(x=0, y=0, width=1470, height=60)
+
+        search_by = Label(search_frame, text='Search By :', font=(
+            'Roboto', 11, 'bold'), bg='red', fg='white')
+        search_by.grid(row=0, column=0, padx=5, sticky=W)
+
+        combo_search_box = ttk.Combobox(
+            search_frame, font=('Roboto', 11, 'bold'), width=18, state='readonly')
+        combo_search_box['value'] = (
+            'Select Option', 'Case_id', 'No. Criminal')
+        combo_search_box.current(0)
+        combo_search_box.grid(row=0, column=1, padx=5, sticky=W)
+
+        search_txt = ttk.Entry(search_frame, width=18,
+                               font=('Roboto', 11, 'bold'))
+        search_txt.grid(row=0, column=2, sticky=W, padx=5)
+
+        btn_search = Button(search_frame, text='Search', font=(
+            'Roboto', 13, 'bold'), width=14, bg='blue', fg='white')
+        btn_search.grid(row=0, column=3, padx=3, pady=5)
+
+        btn_all = Button(search_frame, text='Lihat Semua', font=(
+            'Roboto', 13, 'bold'), width=14, bg='blue', fg='white')
+        btn_all.grid(row=0, column=4, padx=3, pady=5)
+
+        agency_crime = Label(search_frame, text='KEPOLISIAN BANDAR LAMPUNG', font=(
+            'Roboto', 30, 'bold'), bg='white', fg='crimson')
+        agency_crime.grid(row=0, column=5, padx=30, sticky=W, pady=0)
+
+        # Tabel
+        table_frame = Frame(down_frame, bd=2, relief=RIDGE)
+        table_frame.place(x=0, y=60, width=1470, height=170)
+
+        # Scroll bar
+        scroll_x = ttk.Scrollbar(table_frame, orient=HORIZONTAL)
+        scroll_y = ttk.Scrollbar(table_frame, orient=VERTICAL)
+
+        self.criminal_table = ttk.Treeview(table_frame, columns=(
+            "1", "2", '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'), xscrollcommand=scroll_x.set, yscrollcommand=scroll_y.set)
+
+        scroll_x.pack(side=BOTTOM, fill=X)
+        scroll_y.pack(side=RIGHT, fill=Y)
+
+        scroll_x.config(command=self.criminal_table.xview)
+        scroll_y.config(command=self.criminal_table.yview)
+
+        self.criminal_table.heading('1', text='Case Id')
+        self.criminal_table.heading('2', text='No. Crime')
+        self.criminal_table.heading('3', text='Nama Kriminal')
+        self.criminal_table.heading('4', text='Nickname')
+        self.criminal_table.heading('5', text='Tanggal Ditangkap')
+        self.criminal_table.heading('6', text='Tanggal Kriminal')
+        self.criminal_table.heading('7', text='Alamat')
+        self.criminal_table.heading('8', text='Umur')
+        self.criminal_table.heading('9', text='Pekerjaan')
+        self.criminal_table.heading('10', text='Tanda Lahir')
+        self.criminal_table.heading('11', text='Jenis Kejahatan')
+        self.criminal_table.heading('12', text='Nama Ayah')
+        self.criminal_table.heading('13', text='Jenis Kelamin')
+        self.criminal_table.heading('14', text='DPO')
+
+        self.criminal_table['show'] = 'headings'
+
+        self.criminal_table.column('1', width=100)
+        self.criminal_table.column('2', width=100)
+        self.criminal_table.column('3', width=100)
+        self.criminal_table.column('4', width=100)
+        self.criminal_table.column('5', width=100)
+        self.criminal_table.column('6', width=100)
+        self.criminal_table.column('7', width=100)
+        self.criminal_table.column('8', width=100)
+        self.criminal_table.column('9', width=100)
+        self.criminal_table.column('10', width=100)
+        self.criminal_table.column('11', width=100)
+        self.criminal_table.column('12', width=100)
+        self.criminal_table.column('13', width=100)
+        self.criminal_table.column('14', width=100)
+
+        self.criminal_table.pack(fill=BOTH, expand=1)
 
 
 if __name__ == "__main__":
