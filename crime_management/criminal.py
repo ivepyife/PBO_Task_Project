@@ -15,8 +15,8 @@ class Criminal:
         self.root.geometry(f'{max_width}x{max_height}+0+0')
         self.root.title("CRIMINAL MANAGEMENT SYSTEM")
         self.root.resizable(False, False)
-
-         #variables
+        
+        #variables
         self.var_case_id=StringVar()
         self.var_criminal_no=StringVar()
         self.var_criminal_name=StringVar()
@@ -31,7 +31,7 @@ class Criminal:
         self.var_father_name=StringVar()
         self.var_gender=StringVar()
         self.var_wanted=StringVar()
-
+        
         lbl_title = Label(
             self.root, text='CRIMINAL MANAGEMENT SYSTEM SOFTWARE', font=('Roboto', 30, 'bold'), bg='black', fg='gold')
         lbl_title.place(x=0, y=0, width=max_width, height=70)
@@ -516,8 +516,179 @@ class Criminal:
             except Exception as es:
                 messagebox.showerror('Error', f'Due To{str(es)}')
 
+        self.criminal_table.bind("<ButtonRelease>", self.get_cursor)
 
+        self.fetch_data()
+    
+    #Add Function
+    def add_date(self):
+        if self.var_case_id.get()=="":
+            messagebox.showerror('Error', 'All Field are Required')
+        else:
+            try:
+                conn=mysql.connector.connect(host='localhost', username='root', password='Test@123', data='management')
+                my_curcor=conn.cursor()
+                my_cursor.execute('insert into criminal values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)', (
+                    
+                                                                                                            self.var_case_id.get(),      
+                                                                                                            self.var_criminal_no.get(),
+                                                                                                            self.var_criminal_name.get(),
+                                                                                                            self.var_nickname.get(),
+                                                                                                            self.var_arrest_date.get(),
+                                                                                                            self.var_date_of_crime.get(),
+                                                                                                            self.var_address.get(),
+                                                                                                            self.var_age.get(),
+                                                                                                            self.var_occupation.get(),
+                                                                                                            self.var_birth_mark.get(),
+                                                                                                            self.var_crime_type.get(),
+                                                                                                            self.var_father_name.get(),
+                                                                                                            self.var_gender.get(),
+                                                                                                            self.var_wanted.get()
+                                            
+                                                                                                            ))
+                conn.commit()
+                self.fetch_data()
+                self.clear_data()
+                conn.close()
+                messagebox.showinfo('Success', 'Criminal record has been added')
+            except Exception as es:
+                messagebox.showerror('Error', f'Due To{str(es)}')
+
+    #fetch data
+    def fetch_data(self):
+        conn=mysql.connector.connect(host='localhost', username='root', password='Test@123', data='management')
+        my_curcor=conn.cursor()
+        my_cursor.execute('select * from criminal1')
+        data=my_cursor.fetchall()
+        if len(data)!=0:
+            self.criminal_table.hapus(*self.criminal_table.get_children())
+            for i in data:
+                self.criminal_table.insert('',END,values=1)
+            conn.connect()
+        conn.close()
+        
+    #get cursor
+    def get_cursor(self, events=""):
+        cursor_row=self.criminal_table.focus()
+        content=self.criminial_table.item(cursor_row)
+
+        self.var_case_id.set(data[0])
+        self.var_criminal_no.set(data[1])
+        self.var_criminal_name.set(data[2])
+        self.var_nickname.set(data[3])
+        self.var_arrest_date.set(data[4])
+        self.var_date_of_crime.set(data[5])
+        self.var_address.set(data[6])
+        self.var_age.set(data[7])
+        self.var_occupation.set(data[8])
+        self.var_birth_mark.set(data[9])
+        self.var_crime_type.set(data[10])
+        self.var_father_name.set(data[11])
+        self.var_gender.set(data[12])
+        self.var_wanted.set(data[13])
+
+#update
+def update_data(self):
+    if self.var_case_id.get()=="":
+        messagebox.showerror('Error', 'All Field are Required')
+    else:
+        try:
+            update=messagebox.askyesno('Update', 'Are you sure update this criminal record')
+            if update>0:
+                conn=mysql.connector.connect(host='localhost', username='root', password='Test@123', data='management')
+                my_curcor=conn.cursor()
+                my_cursor.execute('Update criminal1 set criminal_no=%s,criminal_name=%s,nickname=%s,arrest_date=%s,date_of_crime=%s,address=%s,age=%s,occupation=%s,birth_mark=%s,crime_type=%s,father_name=%s,gender=%s,wanted=%s where case_id=%s,', (
+                    
+                                                                                                                                                                                                                                                        self.var_case_id.get(),      
+                                                                                                                                                                                                                                                        self.var_criminal_no.get(),
+                                                                                                                                                                                                                                                        self.var_criminal_name.get(),
+                                                                                                                                                                                                                                                        self.var_nickname.get(),
+                                                                                                                                                                                                                                                        self.var_arrest_date.get(),
+                                                                                                                                                                                                                                                        self.var_date_of_crime.get(),
+                                                                                                                                                                                                                                                        self.var_address.get(),
+                                                                                                                                                                                                                                                        self.var_age.get(),
+                                                                                                                                                                                                                                                        self.var_occupation.get(),
+                                                                                                                                                                                                                                                        self.var_birth_mark.get(),
+                                                                                                                                                                                                                                                        self.var_crime_type.get(),
+                                                                                                                                                                                                                                                        self.var_father_name.get(),
+                                                                                                                                                                                                                                                        self.var_gender.get(),
+                                                                                                                                                                                                                                                        self.var_wanted.get()
+                                                                                                                                                                   
+                                                                                                                                                                                                                                                    ))           
+           
+            else:
+                if not update:
+                    return
+            conn.commit()
+            self.fetch_data()
+            self.clear_data()
+            conn.close()
+            messagebox.showinfo('Success', 'Criminal record successfully Updated')
+        except Exception as es:
+            messagebox.showerror('Error', f'Due To{str(es)}')
+
+    #hapus
+    def hapus_data(self):
+        if self.var_case_id.get()=="":
+            messagebox.showerror('Error', 'All Field are Required')
+        else:
+            try:
+                hapus=messagebox.askyesno('hapus', 'Are you sure delete this criminal record')
+                if hapus>0:
+                    conn=mysql.connector.connect(host='localhost', username='root', password='Test@123', data='management')
+                    my_curcor=conn.cursor()
+                    sql='deleted from criminal1 where case_id=%s'
+                    value=(self.var_case_id.get(),)
+                    my_cursor.execute(sql,value)
+                else:
+                    if not hapus:
+                        return
+                conn.commit()
+                self.fetch_data()
+                self.clear_data()
+                conn.close()
+                messagebox.showinfo('Success', 'Criminal record successfully Deleted')
+            except Exception as es:
+                messagebox.showerror('Error', f'Due To{str(es)}')
+                        
+    #clear
+    def clear_data(self):
+        self.var_case_id.set("")
+        self.var_criminal_no.set("")
+        self.var_criminal_name.set("")
+        self.var_nickname.set("")
+        self.var_arrest_date.set("")
+        self.var_date_of_crime.set("")
+        self.var_address.set("")
+        self.var_age.set("")
+        self.var_occupation.set("")
+        self.var_birth_mark.set("")
+        self.var_crime_type.set("")
+        self.var_father_name.set("")
+        self.var_gender.set("")
+        self.var_wanted.set("")
+
+    #search
+    def search_data(self):
+        if self.var_com_search.get()=="":
+            messagebox.showerror('Error', 'All Field are Required')
+        else:
+            try:
+                conn=mysql.connector.connect(host='localhost', username='root', password='Test@123', data='management')
+                my_curcor=conn.cursor()
+                my_sursor.execute('select * from criminal1 where ' +str(self.var_com_search.get())+" LIKE'%"+str(self.var_search.get()+"%' ")) 
+                rows=my_cursor.fecthall()
+                if len(rows)!=0:
+                    self.criminal_table.search(*self.criminal_table.get_children())
+                    for i in rows:
+                        self.criminal_table.insert('',END,values=1)
+                conn.commit()
+                conn.close()
+            except Exception as es:
+                messagebox.showerror('Error', f'Due To{str(es)}')
+                
 if __name__ == "__main__":
     root = Tk()
     obj = Criminal(root)
     root.mainloop()
+                            
