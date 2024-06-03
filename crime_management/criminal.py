@@ -271,7 +271,7 @@ class Criminal:
         combo_search_box = ttk.Combobox(
             search_frame, textvariable=self.var_com_search, font=('Roboto', 11, 'bold'), width=18, state='readonly')
         combo_search_box['value'] = (
-            'Select Option', 'Case_id', 'No. Criminal')
+            'Select Option', 'Case_id', 'criminal_no')
         combo_search_box.current(0)
         combo_search_box.grid(row=0, column=1, padx=5, sticky=W)
 
@@ -391,7 +391,7 @@ class Criminal:
         if len(data)!=0:
             self.criminal_table.delete(*self.criminal_table.get_children())
             for i in data:
-                self.criminal_table.insert('',END,values=1)
+                self.criminal_table.insert('',END,values=i)
             conn.connect()
         conn.close()
 
@@ -426,7 +426,7 @@ class Criminal:
                 if update>0:
                     conn=mysql.connector.connect(host='localhost', port='3306', username='root', password='', database='management')
                     my_cursor=conn.cursor()
-                    my_cursor.execute('Update criminal set criminal_no=%s,criminal_name=%s,nickname=%s,arrest_date=%s,date_of_crime=%s,address=%s,age=%s,occupation=%s,birth_mark=%s,crime_type=%s,father_name=%s,gender=%s,wanted=%s where case_id=%s,', (
+                    my_cursor.execute('Update criminal set criminal_no=%s,criminal_name=%s,nick_name=%s,arrest_date=%s,date_of_crime=%s,address=%s,age=%s,occupation=%s,birth_mark=%s,crime_type=%s,father_name=%s,gender=%s,wanted=%s where case_id=%s',(
 
                                                                                                                                                                                                                                                             self.var_case_id.get(),      
                                                                                                                                                                                                                                                             self.var_criminal_no.get(),
@@ -466,7 +466,7 @@ class Criminal:
                 if hapus>0:
                     conn=mysql.connector.connect(host='localhost', port='3306', username='root', password='', database='management')
                     my_cursor=conn.cursor()
-                    sql='deleted from criminal where Case_id=%s'
+                    sql='delete from criminal where case_id=%s'
                     value=(self.var_case_id.get(),)
                     my_cursor.execute(sql,value)
                 else:
@@ -506,11 +506,11 @@ class Criminal:
                 conn=mysql.connector.connect(host='localhost', port='3306', username='root', password='', database='management')
                 my_cursor=conn.cursor()
                 my_cursor.execute('select * from criminal where ' +str(self.var_com_search.get())+" LIKE'%"+str(self.var_search.get()+"%' ")) 
-                rows=my_cursor.fecthall()
+                rows=my_cursor.fetchall()
                 if len(rows)!=0:
-                    self.criminal_table.search(*self.criminal_table.get_children())
+                    self.criminal_table.delete(*self.criminal_table.get_children())
                     for i in rows:
-                        self.criminal_table.insert('',END,values=1)
+                        self.criminal_table.insert('',END,values=i)
                 conn.commit()
                 conn.close()
             except Exception as es:
