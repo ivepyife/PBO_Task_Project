@@ -354,7 +354,7 @@ class Criminal:
             messagebox.showerror('Error', 'All Field are Required')
         else:
             try:
-                conn=mysql.connector.connect(host='localhost', port='3306', username='root', password='', database='management')
+                conn=mysql.connector.connect(host='147.139.195.118', port='3306', username='admin', password='SOK1PSTIC', database='management')
                 my_cursor=conn.cursor()
                 my_cursor.execute('insert into criminal values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)', (
 
@@ -384,7 +384,7 @@ class Criminal:
 
     #fetch data
     def fetch_data(self):
-        conn=mysql.connector.connect(host='localhost', port='3306', username='root', password='', database='management')
+        conn=mysql.connector.connect(host='147.139.195.118', port='3306', username='admin', password='SOK1PSTIC', database='management')
         my_cursor=conn.cursor()
         my_cursor.execute('select * from criminal')
         data=my_cursor.fetchall()
@@ -424,7 +424,7 @@ class Criminal:
             try:
                 update=messagebox.askyesno('Update', 'Are you sure update this criminal record')
                 if update>0:
-                    conn=mysql.connector.connect(host='localhost', port='3306', username='root', password='', database='management')
+                    conn=mysql.connector.connect(host='147.139.195.118', port='3306', username='admin', password='SOK1PSTIC', database='management')
                     my_cursor=conn.cursor()
                     my_cursor.execute('Update criminal set criminal_no=%s,criminal_name=%s,nick_name=%s,arrest_date=%s,date_of_crime=%s,address=%s,age=%s,occupation=%s,birth_mark=%s,crime_type=%s,father_name=%s,gender=%s,wanted=%s where case_id=%s',(
 
@@ -464,7 +464,7 @@ class Criminal:
             try:
                 hapus=messagebox.askyesno('hapus', 'Are you sure delete this criminal record')
                 if hapus>0:
-                    conn=mysql.connector.connect(host='localhost', port='3306', username='root', password='', database='management')
+                    conn=mysql.connector.connect(host='147.139.195.118', port='3306', username='admin', password='SOK1PSTIC', database='management')
                     my_cursor=conn.cursor()
                     sql='delete from criminal where case_id=%s'
                     value=(self.var_case_id.get(),)
@@ -503,7 +503,7 @@ class Criminal:
             messagebox.showerror('Error', 'All Field are Required')
         else:
             try:
-                conn=mysql.connector.connect(host='localhost', port='3306', username='root', password='', database='management')
+                conn=mysql.connector.connect(host='147.139.195.118', port='3306', username='admin', password='SOK1PSTIC', database='management')
                 my_cursor=conn.cursor()
                 my_cursor.execute('select * from criminal where ' +str(self.var_com_search.get())+" LIKE'%"+str(self.var_search.get()+"%' ")) 
                 rows=my_cursor.fetchall()
